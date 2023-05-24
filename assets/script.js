@@ -4,13 +4,14 @@ var computerArray = ["Rock", "Paper", "Scissors", "Lizard", "Spock"];
 var userThrow = document.getElementById("user-choice");
 var computerThrow = document.getElementById("computer-choice");
 var winner = document.getElementById("winner");
+var wins = localStorage.getItem("wins") || 0;
+
+
 for (var i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function () {
     userChoice = this.textContent;
     var computerRandom = Math.floor(Math.random() * 5);
     var computerChoice = computerArray[computerRandom];
-    console.log(userChoice);
-    console.log(computerChoice);
 
     function determineWinner() {
       if (userChoice === computerChoice) {
@@ -41,10 +42,14 @@ for (var i = 0; i < buttons.length; i++) {
 
     if (result === "You Win!") {
       winner.textContent = "You win!";
+      wins++;
+      localStorage.setItem("wins", wins);
+      console.log(wins);
     } else if (result === "You lose!") {
       winner.textContent = "You lose!";
     } else {
       winner.textContent = "It's a tie!";
     }
-  });
-}
+  }
+  )}
+
