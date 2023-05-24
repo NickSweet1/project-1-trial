@@ -4,8 +4,8 @@ var computerArray = ["Rock", "Paper", "Scissors", "Lizard", "Spock"];
 var userThrow = document.getElementById("user-choice");
 var computerThrow = document.getElementById("computer-choice");
 var winner = document.getElementById("winner");
-var wins = localStorage.getItem("wins") || 0;
-
+var totalWins = document.getElementById("total-wins");
+var wins = localStorage.getItem("wins") || 1;
 
 for (var i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function () {
@@ -15,7 +15,7 @@ for (var i = 0; i < buttons.length; i++) {
 
     function determineWinner() {
       if (userChoice === computerChoice) {
-        return ("It's a tie");
+        return "It's a tie";
       } else if (
         (userChoice === "Rock" &&
           (computerChoice === "Scissors" || computerChoice === "Lizard")) ||
@@ -28,10 +28,11 @@ for (var i = 0; i < buttons.length; i++) {
         (userChoice === "Spock" &&
           (computerChoice === "Scissors" || computerChoice === "Rock"))
       ) {
-        return ("You Win!");
+        return "You Win!";
       } else {
-        return ("You lose!");
+        return "You lose!";
       }
+
       // Additional logic to determine the winner
     }
 
@@ -42,14 +43,13 @@ for (var i = 0; i < buttons.length; i++) {
 
     if (result === "You Win!") {
       winner.textContent = "You win!";
-      wins++;
       localStorage.setItem("wins", wins);
-      console.log(wins);
+      totalWins.textContent = "Your current streak: " + localStorage.getItem("wins", wins);
+      wins++;
     } else if (result === "You lose!") {
       winner.textContent = "You lose!";
     } else {
       winner.textContent = "It's a tie!";
     }
-  }
-  )}
-
+  });
+}
